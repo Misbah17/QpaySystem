@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".GenerateQR">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="412dp"
+        android:layout_height="43dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:background="#FF5722"
+        android:orientation="vertical"
+        android:text="Generate QR CODE"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/etinputvalue"
+        android:layout_width="338in"
+        android:layout_height="48dp"
+        android:layout_below="@id/btnstart"
+        android:layout_alignTop="@+id/linearLayout"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="89dp"
+        android:layout_marginTop="337dp"
+        android:layout_marginEnd="108dp"
+        android:layout_marginBottom="72dp"
+        android:background="@drawable/rounded_edittextx"
+        android:ems="10"
+        android:hint="Input Money"
+        android:inputType="phone" />
+
+    <!--<android.support.v7.widget.AppCompatEditText-->
+        <!--android:id="@+id/etinputvalue"-->
+        <!--android:layout_width="319dp"-->
+        <!--android:layout_height="41dp"-->
+        <!--android:layout_alignTop="@+id/linearLayout"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:layout_marginTop="267dp"-->
+        <!--android:layout_marginEnd="50dp"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:hint="Input Money"-->
+        <!--android:inputType="textCapSentences"-->
+        <!--android:paddingStart="8dp"-->
+        <!--android:paddingEnd="8dp"-->
+        <!--android:text="Input Money"-->
+        <!--android:textColor="@color/blackColor"-->
+        <!--android:textSize="15sp"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintHorizontal_bias="0.488"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/linearLayout"-->
+        <!--app:layout_constraintVertical_bias="0.0" />-->
+
+    <!--<FrameLayout-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="377dp"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintHorizontal_bias="0.533"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+        <!--app:layout_constraintVertical_bias="0.509">-->
+
+    <ImageView
+        android:id="@+id/imageQR"
+        android:layout_width="373dp"
+        android:layout_height="321dp"
+        android:layout_above="@id/etinputvalue"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="27dp"
+        android:layout_marginBottom="332dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.602"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499" />
+
+    <EditText
+        android:id="@+id/ScanResult"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_below="@id/etinputvalue"
+        android:layout_alignTop="@+id/linearLayout"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="85dp"
+        android:layout_marginTop="391dp"
+        android:layout_marginEnd="112dp"
+        android:layout_marginBottom="72dp"
+        android:background="@drawable/rounded_edittextx"
+        android:ems="10"
+        android:hint="Scanned Item" />
+
+    <!--<Button-->
+        <!--android:id="@+id/btngeneratecode"-->
+        <!--android:layout_width="289dp"-->
+        <!--android:layout_height="38dp"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_marginStart="42dp"-->
+        <!--android:layout_marginEnd="50dp"-->
+        <!--android:layout_marginBottom="29dp"-->
+        <!--android:background="@color/orangecolor"-->
+        <!--android:text="Generate QR_Code"-->
+        <!--android:textStyle="italic"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintHorizontal_bias="0.0"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/linearLayout"-->
+        <!--app:layout_constraintVertical_bias="1.0" />-->
+
+    <Button
+        android:id="@+id/btnstart"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="33dp"
+        android:layout_marginEnd="45dp"
+        android:layout_marginBottom="75dp"
+        android:background="@color/orangecolor"
+        android:text="Generata QR_CODE"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnscan"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="36dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginBottom="26dp"
+        android:background="@color/orangecolor"
+        android:text="Scan Code"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="1.0" />
+</RelativeLayout>

@@ -1,0 +1,77 @@
+{
+  "project_info": {
+    "project_number": "750915232856",
+    "firebase_url": "https://login-2d386.firebaseio.com",
+    "project_id": "login-2d386",
+    "storage_bucket": "login-2d386.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:750915232856:android:6827bdef6bb58f3fef962d",
+        "android_client_info": {
+          "package_name": "com.microhybrid.Login"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "750915232856-ut1af5upreifsatfvthctrsug65pliuf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBI4B_G6zAKFo5rahlvxhNItvaSDQgJVmc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "750915232856-ut1af5upreifsatfvthctrsug65pliuf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:750915232856:android:02d54af22d028501ef962d",
+        "android_client_info": {
+          "package_name": "com.microhybrid.login"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "750915232856-pevtmg4ip288e872e0o26usvl6vdpalm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.microhybrid.login",
+            "certificate_hash": "2dfc22ad2ac55ef49f778948fbebca7b8da364eb"
+          }
+        },
+        {
+          "client_id": "750915232856-ut1af5upreifsatfvthctrsug65pliuf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBI4B_G6zAKFo5rahlvxhNItvaSDQgJVmc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "750915232856-ut1af5upreifsatfvthctrsug65pliuf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "169382646158",
+    "firebase_url": "https://transactionsystem-5c29c.firebaseio.com",
+    "project_id": "transactionsystem-5c29c",
+    "storage_bucket": "transactionsystem-5c29c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169382646158:android:63e6608921fa56d26ad4df",
+        "android_client_info": {
+          "package_name": "com.microhybrid.transactionsystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "169382646158-2q44ib2b5kvihf3jfifb1nldmfdikrqa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFP3zb6iAaa4n-ypUbS-6KCTmSTlantjQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "169382646158-2q44ib2b5kvihf3jfifb1nldmfdikrqa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
