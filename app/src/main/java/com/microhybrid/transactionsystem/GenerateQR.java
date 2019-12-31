@@ -1,5 +1,6 @@
 package com.microhybrid.transactionsystem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,21 +12,36 @@ import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.ListView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.WriterException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;
-import androidmads.library.qrgenearator.QRGSaver;
+
 
 public class GenerateQR extends AppCompatActivity {
 
+    FirebaseUser user;
+    FirebaseAuth mauth;
+    FirebaseDatabase databse;
+    private DatabaseReference ref;
     String TAG = "GenerateQRCode";
-    EditText edtValue ;
+    EditText edtValue;
     ImageView qrImage;
     Button start, save;
     String inputValue;
@@ -33,8 +49,10 @@ public class GenerateQR extends AppCompatActivity {
     Bitmap bitmap;
     QRGEncoder qrgEncoder;
     Button Scan;
-  public static EditText resultScanTextview;
-
+    ArrayAdapter<String> adapter;
+    public static ListView list;
+    public static EditText resultScanTextview;
+    private List<String> userInformations ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,50 +61,118 @@ public class GenerateQR extends AppCompatActivity {
 
 
         Scan = findViewById(R.id.btnscan);
-        resultScanTextview =findViewById(R.id.ScanResult);
+        resultScanTextview = findViewById(R.id.ScanResult);
+
+        // Intent i = getIntent();
+
+        // resultScanTextview.setText(i.getStringExtra("Value"));
+
+//        Bundle bundle = getIntent().getExtras();
+//        resultScanTextview.setText(bundle.getString("Value"));
 
         Scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),ScanCode.class));
+                startActivity(new Intent(getApplicationContext(), ScanCode.class));
             }
         });
 
         qrImage = (ImageView) findViewById(R.id.imageQR);
         edtValue = (EditText) findViewById(R.id.etinputvalue);
-        start = (Button) findViewById(R.id.btnstart);
-      //  save = (Button) findViewById(R.id.btngeneratecode);
+        start = (Button) findViewById(R.id.Generateqr);
+       // list = findViewById(R.id.listviewuser);
+        //  save = (Button) findViewById(R.id.btngeneratecode);
+        mauth = FirebaseAuth.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
-        start.setOnClickListener(new View.OnClickListener() {
+    }
+
+    private void Generate() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+        String amountInput = edtValue.getText().toString().trim();
+        DatabaseReference ref = database.getReference().child("user Information");
+
+        final UserInformation userInformation = new UserInformation();
+
+
+        final String amount;
+        final String email;
+        final String date;
+
+
+        email = transaction.user_email;
+        amount = amountInput;
+        date = transaction.date;
+
+//          userInformations = new ArrayList<String>();
+//
+//          adapter = new ArrayAdapter<String>(this, R.layout.activity_generate_qr,R.id.username, userInformations);
+        ref.addValueEventListener(new ValueEventListener() {
+
+
             @Override
-            public void onClick(View v) {
-                inputValue = edtValue.getText().toString().trim();
-                if (inputValue.length() > 0) {
-                    WindowManager manager = (WindowManager) getSystemService(WINDOW_SERVICE);
-                    Display display = manager.getDefaultDisplay();
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                    Point point = new Point();
-                    display.getSize(point);
-                    int width = 1000;
-                    int height = 700;
-                    int smallerDimension = 1000 > 700 ? width : height;
-                    smallerDimension = smallerDimension * 1000/700 ;
+                //  String amountInput = edtValue.getText().toString().trim();
 
-                    qrgEncoder = new QRGEncoder(
-                            inputValue, null,
-                            QRGContents.Type.TEXT,
-                            smallerDimension);
-                    try {
-                        bitmap = qrgEncoder.encodeAsBitmap();
-                        qrImage.setImageBitmap(bitmap);
-                    } catch (WriterException e) {
-                        Log.v(TAG, e.toString());
-                    }
-                } else {
-                    edtValue.setError("Required");
+                //   final String amount; amount = amountInput;
+//                userInformations.clear();
+                final String name = transaction.user_name;
+                List<String> userinfo = new ArrayList<>();
+                for (DataSnapshot Snapshot : dataSnapshot.getChildren()) {
+
+                    userinfo.add(Snapshot.getKey());
+                    UserInformation retriveinfo = Snapshot.getValue(UserInformation.class);
+
+                    //   name.matches(retriveinfo.getName());
+                  //  userInformations.add(userInformation.getName().toString()+ "  "+userInformation.getEmail());
+                    //  name.concat(userInformation.getName());
+                    //   resultScanTextview.setText(retriveinfo.getName());
+
                 }
+
+                inputValue = ":"  + name +";:" + email + ";:" + amount + ";:" + date + ";";
+
+                // list.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
+
+
+        if (amountInput.length() > 0) {
+            WindowManager manager = (WindowManager) getSystemService(WINDOW_SERVICE);
+            Display display = manager.getDefaultDisplay();
+
+            Point point = new Point();
+            display.getSize(point);
+            int width = 1000;
+            int height = 700;
+            int smallerDimension = 1000 > 700 ? width : height;
+            smallerDimension = smallerDimension * 1000 / 700;
+
+            qrgEncoder = new QRGEncoder(
+                    inputValue, null,
+                    QRGContents.Type.TEXT,
+                    smallerDimension);
+            try {
+                bitmap = qrgEncoder.encodeAsBitmap();
+                qrImage.setImageBitmap(bitmap);
+            } catch (WriterException e) {
+                Log.v(TAG, e.toString());
+            }
+        } else {
+            edtValue.setError("Required");
+        }
+
+
+    }
+//            }
+//        });
 
 //        save.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -103,7 +189,10 @@ public class GenerateQR extends AppCompatActivity {
 //            }
 //        });
 
-        }
 
+    public void GenerateQR (View view){
+
+        Generate();
     }
+}
 

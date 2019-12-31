@@ -37,7 +37,7 @@ public class Homepage extends AppCompatActivity
     FirebaseUser CurrentUser;
     FirebaseDatabase firebaseDatabase;
     FirebaseAuth mAuth;
-    private Session session;
+   // private Session session;
     TextView TVusername, TVuseremail;
     public static final String TAG = "YOUR-TAG-NAME";
 
@@ -75,10 +75,10 @@ public class Homepage extends AppCompatActivity
         firebaseDatabase =FirebaseDatabase.getInstance();
       //  CurrentUser = mAuth.getCurrentUser();
 
-       session = new Session();
+      // session = new Session();
 
-        session.setName("Name");
-        session.getName();
+//        session.setName("Name");
+//        session.getName();
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

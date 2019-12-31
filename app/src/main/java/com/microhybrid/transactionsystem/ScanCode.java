@@ -26,7 +26,7 @@ public class ScanCode extends AppCompatActivity implements ZXingScannerView.Resu
 
 
 
-     //      val qrCodeScanner = findViewById(R.id.qrCodeScanner);
+        //      val qrCodeScanner = findViewById(R.id.qrCodeScanner);
         // val = findViewById<ZXingScannerView>(R.id.qrCodeScanner);
 
     }
@@ -63,17 +63,93 @@ public class ScanCode extends AppCompatActivity implements ZXingScannerView.Resu
 
     @Override
     public void handleResult(Result rawResult) {
-        GenerateQR.resultScanTextview.setText(rawResult.getText());
+        //GenerateQR.resultScanTextview.setText(rawResult.getText());
+        String s = rawResult.getText();
+
+        char[] charString;
+        charString= s.toCharArray();
+        boolean nameFlag,emailFlag,dateFlag,amountFlag;
+        nameFlag = true;
+        emailFlag = false;
+        dateFlag = false;
+        amountFlag= false;
+
+        String nameS,amountS,emailS,dateS;
+        nameS="";
+        amountS="";
+        emailS="";
+        dateS="";
+        int i=0;
+        while (nameFlag || amountFlag || emailFlag || dateFlag){
+
+            if(nameFlag){
+
+                if(charString[i]==':') {
+                    i++;
+                    continue;
+                }else if(charString[i]!=';'){
+                    nameS = nameS.concat(charString[i]+"");
+                }else{
+                    nameFlag  = false;
+                    emailFlag = true;
+                    i++;
+                    continue;
+                }
+            }
+            if(emailFlag){
+                if(charString[i]==':'){
+                    i++;
+                    continue;
+                }else if(charString[i]!=';'){
+                    emailS = emailS.concat(charString[i]+"");
+                }else{
+                    emailFlag = false;
+                    amountFlag = true;
+                    i++;
+                    continue;
+                }
+            }
+            if(amountFlag){
+                if(charString[i]==':'){
+                    i++;
+                    continue;
+                }else if(charString[i]!=';'){
+                    amountS = amountS.concat(charString[i]+"");
+                }else{
+                    amountFlag = false;
+                    dateFlag = true;
+                    i++;
+                    continue;
+                }
+            }
+            if(dateFlag){
+                if(charString[i]==':'){
+                    i++;
+                    continue;
+                }else if(charString[i]!=';'){
+                    dateS = dateS.concat(charString[i]+"");
+                }else{
+                    dateFlag = false;
+                    i++;
+                    continue;
+                }
+            }
+            i++;
+        }
+
+        GenerateQR.resultScanTextview.setText(nameS);
+
         onBackPressed();
+
         // Do something with the result here
         // Prints scan results
-      //  Logger.verbose("result", rawResult.getText());
+        //  Logger.verbose("result", rawResult.getText());
         // Prints the scan format (qrcode, pdf417 etc.)
         //Logger.verbose("result", rawResult.getBarcodeFormat().toString());
         //If you would like to resume scanning, call this method below:
         //mScannerView.resumeCameraPreview(this);
         //Intent intent = new Intent();
-       // intent.putExtra(AppConstants.KEY_QR_CODE, rawResult.getText());
+        // intent.putExtra(AppConstants.KEY_QR_CODE, rawResult.getText());
 //        setResult(RESULT_OK, intent);
 //        finish();
     }

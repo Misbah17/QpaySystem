@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -27,148 +27,203 @@
 
     <EditText
         android:id="@+id/etinputvalue"
-        android:layout_width="338in"
-        android:layout_height="48dp"
-        android:layout_below="@id/btnstart"
+        android:layout_width="220dp"
+        android:layout_height="49dp"
+
         android:layout_alignTop="@+id/linearLayout"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="89dp"
-        android:layout_marginTop="337dp"
-        android:layout_marginEnd="108dp"
-        android:layout_marginBottom="72dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/rounded_edittextx"
         android:ems="10"
         android:hint="Input Money"
-        android:inputType="phone" />
+        android:inputType="phone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.424"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageQR"
+        app:layout_constraintVertical_bias="0.122" />
 
     <!--<android.support.v7.widget.AppCompatEditText-->
-        <!--android:id="@+id/etinputvalue"-->
-        <!--android:layout_width="319dp"-->
-        <!--android:layout_height="41dp"-->
-        <!--android:layout_alignTop="@+id/linearLayout"-->
-        <!--android:layout_alignParentEnd="true"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginTop="267dp"-->
-        <!--android:layout_marginEnd="50dp"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--android:hint="Input Money"-->
-        <!--android:inputType="textCapSentences"-->
-        <!--android:paddingStart="8dp"-->
-        <!--android:paddingEnd="8dp"-->
-        <!--android:text="Input Money"-->
-        <!--android:textColor="@color/blackColor"-->
-        <!--android:textSize="15sp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintHorizontal_bias="0.488"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="@+id/linearLayout"-->
-        <!--app:layout_constraintVertical_bias="0.0" />-->
+    <!--android:id="@+id/etinputvalue"-->
+    <!--android:layout_width="319dp"-->
+    <!--android:layout_height="41dp"-->
+    <!--android:layout_alignTop="@+id/linearLayout"-->
+    <!--android:layout_alignParentEnd="true"-->
+    <!--android:layout_marginStart="8dp"-->
+    <!--android:layout_marginTop="267dp"-->
+    <!--android:layout_marginEnd="50dp"-->
+    <!--android:layout_marginBottom="8dp"-->
+    <!--android:hint="Input Money"-->
+    <!--android:inputType="textCapSentences"-->
+    <!--android:paddingStart="8dp"-->
+    <!--android:paddingEnd="8dp"-->
+    <!--android:text="Input Money"-->
+    <!--android:textColor="@color/blackColor"-->
+    <!--android:textSize="15sp"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintEnd_toEndOf="parent"-->
+    <!--app:layout_constraintHorizontal_bias="0.488"-->
+    <!--app:layout_constraintStart_toStartOf="parent"-->
+    <!--app:layout_constraintTop_toTopOf="@+id/linearLayout"-->
+    <!--app:layout_constraintVertical_bias="0.0" />-->
 
     <!--<FrameLayout-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="377dp"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintHorizontal_bias="0.533"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:layout_constraintVertical_bias="0.509">-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="377dp"-->
+    <!--android:layout_marginBottom="8dp"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintEnd_toEndOf="parent"-->
+    <!--app:layout_constraintHorizontal_bias="0.533"-->
+    <!--app:layout_constraintStart_toStartOf="parent"-->
+    <!--app:layout_constraintTop_toTopOf="parent"-->
+    <!--app:layout_constraintVertical_bias="0.509">-->
 
     <ImageView
         android:id="@+id/imageQR"
-        android:layout_width="373dp"
-        android:layout_height="321dp"
+        android:layout_width="281dp"
+        android:layout_height="216dp"
         android:layout_above="@id/etinputvalue"
         android:layout_below="@+id/linearLayout"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="27dp"
-        android:layout_marginBottom="332dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.602"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.166" />
 
     <EditText
         android:id="@+id/ScanResult"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_below="@id/etinputvalue"
-        android:layout_alignTop="@+id/linearLayout"
+        android:layout_width="220dp"
+        android:layout_height="43dp"
+
+        android:layout_alignBottom="@+id/imageQR"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="85dp"
-        android:layout_marginTop="391dp"
-        android:layout_marginEnd="112dp"
-        android:layout_marginBottom="72dp"
-        android:background="@drawable/rounded_edittextx"
+
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:ems="10"
-        android:hint="Scanned Item" />
+        android:hint="Scanned Item"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.417"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etinputvalue"
+        app:layout_constraintVertical_bias="0.117" />
 
     <!--<Button-->
-        <!--android:id="@+id/btngeneratecode"-->
-        <!--android:layout_width="289dp"-->
-        <!--android:layout_height="38dp"-->
-        <!--android:layout_alignParentStart="true"-->
-        <!--android:layout_alignParentEnd="true"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_marginStart="42dp"-->
-        <!--android:layout_marginEnd="50dp"-->
-        <!--android:layout_marginBottom="29dp"-->
-        <!--android:background="@color/orangecolor"-->
-        <!--android:text="Generate QR_Code"-->
-        <!--android:textStyle="italic"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintHorizontal_bias="0.0"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/linearLayout"-->
-        <!--app:layout_constraintVertical_bias="1.0" />-->
+    <!--android:id="@+id/btngeneratecode"-->
+    <!--android:layout_width="289dp"-->
+    <!--android:layout_height="38dp"-->
+    <!--android:layout_alignParentStart="true"-->
+    <!--android:layout_alignParentEnd="true"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_marginStart="42dp"-->
+    <!--android:layout_marginEnd="50dp"-->
+    <!--android:layout_marginBottom="29dp"-->
+    <!--android:background="@color/orangecolor"-->
+    <!--android:text="Generate QR_Code"-->
+    <!--android:textStyle="italic"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintEnd_toEndOf="parent"-->
+    <!--app:layout_constraintHorizontal_bias="0.0"-->
+    <!--app:layout_constraintStart_toStartOf="parent"-->
+    <!--app:layout_constraintTop_toBottomOf="@+id/linearLayout"-->
+    <!--app:layout_constraintVertical_bias="1.0" />-->
 
     <Button
-        android:id="@+id/btnstart"
-        android:layout_width="wrap_content"
-        android:layout_height="38dp"
+        android:id="@+id/Generateqr"
+        android:layout_width="258dp"
+        android:layout_height="43dp"
+        android:layout_above="@+id/ScanResult"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="33dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginBottom="75dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="153dp"
+        android:onClick="GenerateQR"
         android:background="@color/orangecolor"
-        android:text="Generata QR_CODE"
+        android:contextClickable="true"
+        android:lineSpacingExtra="20dp"
+        android:text="Generate QR"
+        android:textAlignment="textStart"
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/btnscan"
-        android:layout_width="wrap_content"
-        android:layout_height="38dp"
+        android:layout_width="157dp"
+        android:layout_height="43dp"
+        android:layout_above="@+id/ScanResult"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="36dp"
-        android:layout_marginEnd="42dp"
-        android:layout_marginBottom="26dp"
+        android:layout_marginTop="8dp"
         android:background="@color/orangecolor"
         android:text="Scan Code"
+        android:textAlignment="viewEnd"
         android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/Generateqr"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="392dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="196dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/useremail"
+        android:layout_width="410dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="152dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/username" />
+
+    <ListView
+        android:id="@+id/listviewuser"
+        android:layout_width="390dp"
+        android:layout_height="190dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="104dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/imageQR"
         app:layout_constraintVertical_bias="1.0" />
-</RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
