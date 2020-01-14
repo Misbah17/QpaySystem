@@ -1,31 +1,23 @@
 package com.microhybrid.transactionsystem;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import android.util.Log;
-import android.view.View;
-
-import androidx.core.view.GravityCompat;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.view.Menu;
-import android.widget.EditText;
-import android.widget.TextView;
-
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
@@ -34,12 +26,15 @@ import com.google.firebase.database.FirebaseDatabase;
 public class Homepage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    FirebaseUser CurrentUser;
+
+private FirebaseAuth.AuthStateListener mAuthListener;
+    FirebaseUser User;
     FirebaseDatabase firebaseDatabase;
     FirebaseAuth mAuth;
    // private Session session;
     TextView TVusername, TVuseremail;
     public static final String TAG = "YOUR-TAG-NAME";
+    String Userid;
 
 
     @Override
@@ -50,17 +45,35 @@ public class Homepage extends AppCompatActivity
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        if (user != null) {
-            // User is signed in
-            Intent i = new Intent(Homepage.this, Homepage.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(i);
-        } else {
-            // User is signed out
-            Log.d(TAG, "onAuthStateChanged:signed_out");
-        }
+        mAuthListener = new FirebaseAuth.AuthStateListener(){
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+               User =FirebaseAuth.getInstance().getCurrentUser();
+
+                if (User != null) {
+                    // User is signed in
+                    Log.d(TAG,"onAuthStateSignedin:" +User.getUid());
+                    Log.d(TAG,"onAuthStateSignedin:" +User.getDisplayName());
+
+
+                    Intent i = new Intent(Homepage.this,Homepage.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(i);
+
+
+                }
+                else {
+                    // User is signed out
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                    Toast.makeText(Homepage.this, "Successfully Signedout", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        };
+
+
+
 
 //        TVuseremail = findViewById(R.id.tvuseremail);
       //  TVusername = findViewById(R.id.tvusername);
@@ -107,6 +120,8 @@ public class Homepage extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+            Intent i = new Intent(Homepage.this,LoginActivity.class);
+            startActivity(i);
             super.onBackPressed();
         }
     }
@@ -144,19 +159,18 @@ public class Homepage extends AppCompatActivity
             case R.id.nav_loanreq:
                 getSupportFragmentManager().beginTransaction().replace(R.id.Content_fragment,
                         new LoanRequest()).commit();
-                finish();
                 break;
 
 
             case R.id.nav_history:
                 getSupportFragmentManager().beginTransaction().replace(R.id.Content_fragment,
                         new History()).commit();
-                finish();
                 break;
 
             case  R.id.logout:
                 mAuth.getInstance().signOut();
                 Intent out = new Intent(Homepage.this,LoginActivity.class);
+                Toast.makeText(Homepage.this, "Successfully Signed out", Toast.LENGTH_SHORT).show();
                 out.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 out.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(out);
@@ -196,5 +210,17 @@ public class Homepage extends AppCompatActivity
    //    TVusername.setText(CurrentUser.getDisplayName());
 //        TVuseremail.setText(CurrentUser.getEmail());
     }
+
+//    public  void onStart(){
+//        super.onStart();
+//      mAuth.addAuthStateListener(mAuthListener);
+//    }
+//
+//    public void onStop(){
+//        super.onStop();
+//        mAuth.removeAuthStateListener(mAuthListener);
+//    }
+
+
 }
 

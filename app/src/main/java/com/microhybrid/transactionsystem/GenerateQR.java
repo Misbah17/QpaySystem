@@ -1,8 +1,5 @@
 package com.microhybrid.transactionsystem;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Point;
@@ -18,16 +15,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.WriterException;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import androidmads.library.qrgenearator.QRGContents;
@@ -51,7 +47,7 @@ public class GenerateQR extends AppCompatActivity {
     Button Scan;
     ArrayAdapter<String> adapter;
     public static ListView list;
-    public static EditText resultScanTextview;
+    public static EditText ScanResult;
     private List<String> userInformations ;
 
     @Override
@@ -61,8 +57,25 @@ public class GenerateQR extends AppCompatActivity {
 
 
         Scan = findViewById(R.id.btnscan);
-        resultScanTextview = findViewById(R.id.ScanResult);
+       ScanResult = findViewById(R.id.ScanResult);
+        qrImage = (ImageView) findViewById(R.id.imageQR);
+        edtValue = (EditText) findViewById(R.id.etinputvalue);
+        start = (Button) findViewById(R.id.Generateqr);
+        list = findViewById(R.id.listviewuser);
 
+        user =FirebaseAuth.getInstance().getCurrentUser();
+
+
+
+          if (user != null) {
+            // User is signed in
+            Intent i = new Intent(GenerateQR.this, GenerateQR.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(i);
+        } else {
+            // User is signed out
+            Log.d(TAG, "onAuthStateChanged:signed_out");
+        }
         // Intent i = getIntent();
 
         // resultScanTextview.setText(i.getStringExtra("Value"));
@@ -77,10 +90,7 @@ public class GenerateQR extends AppCompatActivity {
             }
         });
 
-        qrImage = (ImageView) findViewById(R.id.imageQR);
-        edtValue = (EditText) findViewById(R.id.etinputvalue);
-        start = (Button) findViewById(R.id.Generateqr);
-       // list = findViewById(R.id.listviewuser);
+
         //  save = (Button) findViewById(R.id.btngeneratecode);
         mauth = FirebaseAuth.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -91,16 +101,16 @@ public class GenerateQR extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         String amountInput = edtValue.getText().toString().trim();
-        DatabaseReference ref = database.getReference().child("user Information");
+       DatabaseReference ref = database.getReference().child("user Information");
 
         final UserInformation userInformation = new UserInformation();
 
-
+        final String name;
         final String amount;
         final String email;
         final String date;
 
-
+        name= transaction.user_name;
         email = transaction.user_email;
         amount = amountInput;
         date = transaction.date;
@@ -108,42 +118,47 @@ public class GenerateQR extends AppCompatActivity {
 //          userInformations = new ArrayList<String>();
 //
 //          adapter = new ArrayAdapter<String>(this, R.layout.activity_generate_qr,R.id.username, userInformations);
-        ref.addValueEventListener(new ValueEventListener() {
+//        ref.addValueEventListener(new ValueEventListener() {
+//
+//
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//
+//                //showData(dataSnapshot);
+//                //  String amountInput = edtValue.getText().toString().trim();
+//
+//                //   final String amount; amount = amountInput;
+////                userInformations.clear();
+//
+//                List<String> userinfo = new ArrayList<>();
+//                for (DataSnapshot Snapshot : dataSnapshot.getChildren()) {
+//                    userinfo.add(Snapshot.getKey());
+//                    UserInformation retriveinfo = Snapshot.getValue(UserInformation.class);
+//                   // retriveinfo.setEmail(Snapshot.getValue(UserInformation.class).getEmail());
+//
+//                    final  String  name = retriveinfo.getName().toString();
+//                    ScanResult.setText(name);
+//                    //   name.matches(retriveinfo.getName());
+//                     // userInformations.add(userInformation.getName()+ ""+userInformation.getEmail());
+//                    //Log.v(" Name is","Current user is " +retriveinfo.getName());
+//                  //  name.contains(retriveinfo.getName());
+//                    //  name.concat(userInformation.getName());
+//                    //   resultScanTextview.setText(retriveinfo.getName());
+//
+//                }
+//                //list.setAdapter(adapter);
+//              //inputValue = ":"  + name +";:" + email + ";:" + amount + ";:" + date + ";";
+//              inputValue =":" + email + ";:" + amount + ";:" + date + ";";
+//                // list.setAdapter(adapter);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
 
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                //  String amountInput = edtValue.getText().toString().trim();
-
-                //   final String amount; amount = amountInput;
-//                userInformations.clear();
-                final String name = transaction.user_name;
-                List<String> userinfo = new ArrayList<>();
-                for (DataSnapshot Snapshot : dataSnapshot.getChildren()) {
-
-                    userinfo.add(Snapshot.getKey());
-                    UserInformation retriveinfo = Snapshot.getValue(UserInformation.class);
-
-                    //   name.matches(retriveinfo.getName());
-                  //  userInformations.add(userInformation.getName().toString()+ "  "+userInformation.getEmail());
-                    //  name.concat(userInformation.getName());
-                    //   resultScanTextview.setText(retriveinfo.getName());
-
-                }
-
-                inputValue = ":"  + name +";:" + email + ";:" + amount + ";:" + date + ";";
-
-                // list.setAdapter(adapter);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
+        inputValue = ":"  + name +";:" + email + ";:" + amount + ";:" + date + ";";
         if (amountInput.length() > 0) {
             WindowManager manager = (WindowManager) getSystemService(WINDOW_SERVICE);
             Display display = manager.getDefaultDisplay();
@@ -168,6 +183,12 @@ public class GenerateQR extends AppCompatActivity {
         } else {
             edtValue.setError("Required");
         }
+
+
+    }
+
+    private void showData(DataSnapshot dataSnapshot) {
+
 
 
     }

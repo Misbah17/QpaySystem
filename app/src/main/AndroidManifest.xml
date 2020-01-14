@@ -20,7 +20,8 @@
             android:name=".Homepage"
             android:label="@string/title_activity_homepage"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:theme="@style/splasttheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

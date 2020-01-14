@@ -1,44 +1,36 @@
 package com.microhybrid.transactionsystem;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.database.DatabaseErrorHandler;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.xml.transform.Result;
-
-import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class LoginActivity extends AppCompatActivity  {
 
 
     private FirebaseAuth mAuth;
-
+    private String userID;
     FirebaseAuth.AuthStateListener mAuthListener;
     EditText UserName, password;
     Button login;
@@ -47,10 +39,11 @@ public class LoginActivity extends AppCompatActivity  {
     FirebaseDatabase databse;
     private DatabaseReference ref;
     int counter = 5;
-    final FirebaseDatabase database = FirebaseDatabase.getInstance();
     public static final String TAG = "YOUR-TAG-NAME";
-    private List<UserInformation> userInformations = new ArrayList<>();
-   TextView tvload;
+
+    TextView tvload;
+    ListView list;
+    ArrayAdapter<String> adapter;
 
 //    public  interface DataStatus{
 //
@@ -66,7 +59,7 @@ public class LoginActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mAuth = FirebaseAuth.getInstance();
+
 
         UserName = findViewById(R.id.etname);
         password = findViewById(R.id.etpass);
@@ -74,12 +67,19 @@ public class LoginActivity extends AppCompatActivity  {
         attempts = findViewById(R.id.tvSignin);
         login = findViewById(R.id.btLogin);
         tvload = findViewById(R.id.tvtoast);
-
+        list = findViewById(R.id.mListview);
         //  ref= FirebaseDatabase.getInstance().getReference().child("UserInformation");
 
 
         Intent i = getIntent();
         tvload.setText(i.getStringExtra("Values"));
+
+
+//        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        userID = user.getUid();
+
+
+        mAuth = FirebaseAuth.getInstance();
 
     }
 
@@ -141,9 +141,9 @@ public class LoginActivity extends AppCompatActivity  {
     //////Read Database From Firebase
 
     private void Logindata() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference databaseReference = database.getReference().child("userInformation");
-
-      final   String Username = UserName.getText().toString();
+        final   String Username = UserName.getText().toString();
         final String Pasword = password.getText().toString();
 //
         final String  id = databaseReference.push().getKey();
@@ -155,28 +155,51 @@ public class LoginActivity extends AppCompatActivity  {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                List<String> userInformations = new ArrayList<>();
               //  UserInformation users = dataSnapshot.getValue(UserInformation.class);
                 userInformations.clear();
-                List<String> userinfo = new ArrayList<>();
+
                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
 
-                    userinfo.add(userSnapshot.getKey());
+                //  UserInformation userInformation= new UserInformation();
                     UserInformation userInformation = userSnapshot.getValue(UserInformation.class);
-                   // userInformation.setPkgDetail(userSnapshot.child(Username).getValue(UserInformation.class).getPkgDetail());
+                  // userInformation.setName(userSnapshot.getValue(UserInformation.class).getName());
+//                    userInformation.setEmail(userSnapshot.child(userID).getValue(UserInformation.class).getEmail());
+//                    Log.d(TAG,"Showname:" +userInformation.getName());
+//                    Log.d(TAG,"showEmail:" +userInformation.getEmail());
+                  //  userinfo.add(userSnapshot.getKey());
+
+
+                  //  adapter = new ArrayAdapter<UserInformation>(this,R.layout.loan_req,R.id.textView2,userinfo);
+                  ///  list.setAdapter(adapter);
+                   // userInformation.setPkgDetail(userSnap
+                    // shot.child(Username).getValue(UserInformation.class).getPkgDetail());
                     // userInformations.add(userInformation);
                     //UserInformation userInformation= dataSnapshot.getValue(UserInformation.class);
 
                         if (Username.equals(userInformation.getName()) && Pasword.equals(userInformation.getPassword())) {
-//
+
+                            Log.d(TAG,"Showname:" +Username);
+                            Log.d(TAG,"showEmail:" +userInformation.getEmail());
+                            Log.d(TAG,"showContactNo:" +userInformation.getPhoneNo());
+                            Log.d(TAG,"showAddress:" +userInformation.getAddress());
+                            ArrayList<String> array = new ArrayList();
+                             /// adapter = new ArrayAdapter<String>(this,R.layout.loan_req,R.id.textView2,array);
+//                             list.setAdapter(adapter);
+
                             Toast.makeText(LoginActivity.this, "You are Successfully Logged In", Toast.LENGTH_LONG).show();
-                            Intent a = new Intent(LoginActivity.this, Homepage.class);
+                            Intent a = new Intent(LoginActivity.this,Homepage.class);
                             a.putExtra("Value",Username);
                             a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(a);
                            finish();
+
                         }
-//
+//                        if(!userSnapshot.exists()){
+//                            databaseReference.setValue(new UserInformation(Username, Pasword));
+//                        }
+
 //
 //                       else if (!( Username.equals(userInformation.getName()) && Pasword.equals(userInformation.getPassword()))) {
 //                            Toast.makeText(LoginActivity.this, "User Does not Exist, Please Try Again", Toast.LENGTH_SHORT).show();
