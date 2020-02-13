@@ -7,6 +7,36 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".GenerateQR">
 
+    <TextView
+        android:id="@+id/tvname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.407"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.632" />
+
+    <TextView
+        android:id="@+id/tvemail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.407"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.701" />
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="412dp"
@@ -100,28 +130,6 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.094" />
 
-    <EditText
-        android:id="@+id/ScanResult"
-        android:layout_width="220dp"
-        android:layout_height="43dp"
-
-        android:layout_alignBottom="@+id/imageQR"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:ems="10"
-        android:hint="Scanned Item"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.417"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etinputvalue"
-        app:layout_constraintVertical_bias="0.117" />
-
     <!--<Button-->
     <!--android:id="@+id/btngeneratecode"-->
     <!--android:layout_width="289dp"-->
@@ -187,43 +195,18 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/username"
-        android:layout_width="392dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="196dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/useremail"
-        android:layout_width="410dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="152dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
-
-    <ListView
-        android:id="@+id/listviewuser"
-        android:layout_width="390dp"
-        android:layout_height="190dp"
+        android:id="@+id/tvamoutn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="104dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.407"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageQR"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.764" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,7 +36,6 @@ public class ActivitySignup extends AppCompatActivity implements View.OnClickLis
     EditText Name, Email, password, Cpassword, phone, Location;
     Button Register;
     private UserInformation userInformation;
-    private AwesomeValidation awesomeValidation;
     DatabaseReference databaseReference;
     private String category = "";
     RadioGroup radioGroup;
@@ -84,7 +83,8 @@ public class ActivitySignup extends AppCompatActivity implements View.OnClickLis
         });
 
         /////Firebasedatabase data Save
-
+        Intent i = getIntent();
+        tvload.setText(i.getStringExtra("Value"));
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("userInformation");
         userInformation = new UserInformation();

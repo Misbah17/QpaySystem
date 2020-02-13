@@ -5,7 +5,7 @@ public class UserInformation {
     private String Name;
     private String Email;
     private String etconfirmpass;
-    private String PhoneNo;
+    private  String PhoneNo;
     private String Address;
     private String Password;
     private String CompanyName;

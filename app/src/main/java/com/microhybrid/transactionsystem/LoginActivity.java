@@ -30,15 +30,15 @@ public class LoginActivity extends AppCompatActivity  {
 
 
     private FirebaseAuth mAuth;
-    private String userID;
+  //  private String userID;
     FirebaseAuth.AuthStateListener mAuthListener;
-    EditText UserName, password;
+    public static EditText UserName, password,email;
     Button login;
     TextView entername, Pass, attempts;
     ProgressBar PGL;
     FirebaseDatabase databse;
     private DatabaseReference ref;
-    int counter = 5;
+
     public static final String TAG = "YOUR-TAG-NAME";
 
     TextView tvload;
@@ -60,23 +60,19 @@ public class LoginActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_login);
 
 
-
-        UserName = findViewById(R.id.etname);
-        password = findViewById(R.id.etpass);
+         UserName = findViewById(R.id.etname);
+         password = findViewById(R.id.etpass);
         PGL = findViewById(R.id.PGLogin);
         attempts = findViewById(R.id.tvSignin);
         login = findViewById(R.id.btLogin);
         tvload = findViewById(R.id.tvtoast);
         list = findViewById(R.id.mListview);
+
+
+
+
         //  ref= FirebaseDatabase.getInstance().getReference().child("UserInformation");
 
-
-        Intent i = getIntent();
-        tvload.setText(i.getStringExtra("Values"));
-
-
-//        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//        userID = user.getUid();
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -92,181 +88,80 @@ public class LoginActivity extends AppCompatActivity  {
     //    handleResult();
 
 
-//             if (TextUtils.isEmpty(Email) && TextUtils.isEmpty(Pasword)){
-//                 Toast.makeText(LoginActivity.this, "Fields are empty", Toast.LENGTH_SHORT).show();
-//             }
-
-
-
-//        if(!(Email.isEmpty()&& Pasword.isEmpty()))
-//            mAuth.createUserWithEmailAndPassword(Email, Pasword).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-//                @Override
-//                public void onComplete(@NonNull Task<AuthResult> task) {
-//                    PGL.setVisibility(View.GONE);
-//                    if (task.isSuccessful()) {
-//                        Toast.makeText(LoginActivity.this, " You are Registered Succesfully", Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                    else {
-//                        Toast.makeText(LoginActivity.this, "SignUp Unsuccessful, Try Again", Toast.LENGTH_SHORT).show();
-//                        //startActivity(new Intent(FirstActivity.this, HomeActivity.class));
-//
-//                    }
-//
-//                    // else{
-//                    //  Toast.makeText(FirstActivity.this, " Login in Successful,", Toast.LENGTH_SHORT).show();
-//
-//                    // }
-//
-//
-//
-//
-//
-//                }
-//            });
-//
-//
-//
-//
-//
-//        else{
-//            Toast.makeText(LoginActivity.this, "Error Occured", Toast.LENGTH_SHORT).show();
-//
-//
-//        }
-//
 //
 
     }
     //////Read Database From Firebase
 
     private void Logindata() {
+
+
+        //String auth= FirebaseAuth.getInstance().getCurrentUser().getUid();
+        //String uid = mauth.getCurrentUser().getUid();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference databaseReference = database.getReference().child("userInformation");
-        final   String Username = UserName.getText().toString();
+        final String  Username = UserName.getText().toString();
         final String Pasword = password.getText().toString();
-//
-        final String  id = databaseReference.push().getKey();
-
+//        final String Email= email.getText().toString();
+//        final String  id = databaseReference.push().getKey();
+        databaseReference.keepSynced(true);
         ///////Data retrive code for Login /////
-
 
         databaseReference.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 List<String> userInformations = new ArrayList<>();
-              //  UserInformation users = dataSnapshot.getValue(UserInformation.class);
+                //  UserInformation users = dataSnapshot.getValue(UserInformation.class);
                 userInformations.clear();
 
                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
 
-                //  UserInformation userInformation= new UserInformation();
                     UserInformation userInformation = userSnapshot.getValue(UserInformation.class);
-                  // userInformation.setName(userSnapshot.getValue(UserInformation.class).getName());
-//                    userInformation.setEmail(userSnapshot.child(userID).getValue(UserInformation.class).getEmail());
-//                    Log.d(TAG,"Showname:" +userInformation.getName());
-//                    Log.d(TAG,"showEmail:" +userInformation.getEmail());
-                  //  userinfo.add(userSnapshot.getKey());
+
+                    ArrayList<String> array = new ArrayList();
+//                    ArrayAdapter adapter = new ArrayAdapter(LoginActivity.this,R.layout.loan_req, array);
+//                    list.setAdapter(adapter);
 
 
-                  //  adapter = new ArrayAdapter<UserInformation>(this,R.layout.loan_req,R.id.textView2,userinfo);
-                  ///  list.setAdapter(adapter);
-                   // userInformation.setPkgDetail(userSnap
-                    // shot.child(Username).getValue(UserInformation.class).getPkgDetail());
-                    // userInformations.add(userInformation);
-                    //UserInformation userInformation= dataSnapshot.getValue(UserInformation.class);
+                    if (Username.equals(userInformation.getName()) && Pasword.equals(userInformation.getPassword())) {
 
-                        if (Username.equals(userInformation.getName()) && Pasword.equals(userInformation.getPassword())) {
 
-                            Log.d(TAG,"Showname:" +Username);
-                            Log.d(TAG,"showEmail:" +userInformation.getEmail());
-                            Log.d(TAG,"showContactNo:" +userInformation.getPhoneNo());
-                            Log.d(TAG,"showAddress:" +userInformation.getAddress());
-                            ArrayList<String> array = new ArrayList();
-                             /// adapter = new ArrayAdapter<String>(this,R.layout.loan_req,R.id.textView2,array);
-//                             list.setAdapter(adapter);
+                        Log.d(TAG, "Showname:" + Username);
+//                      profileActivity.name.setText(Username);
+                        Log.d(TAG, "showEmail:" + userInformation.getEmail());
+                        Log.d(TAG, "showContactNo:" + userInformation.getPhoneNo());
+                        Log.d(TAG, "showAddress:" + userInformation.getAddress());
 
-                            Toast.makeText(LoginActivity.this, "You are Successfully Logged In", Toast.LENGTH_LONG).show();
-                            Intent a = new Intent(LoginActivity.this,Homepage.class);
-                            a.putExtra("Value",Username);
-                            a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(a);
-                           finish();
+                        Toast.makeText(LoginActivity.this, "You are Successfully Logged In", Toast.LENGTH_LONG).show();
+                        Intent a = new Intent(LoginActivity.this, Homepage.class);
+                        a.putExtra("Name", userInformation.getName());
+                        a.putExtra("Email", userInformation.getEmail());
+                        a.putExtra("Num", userInformation.getPhoneNo());
+                        a.putExtra("company", userInformation.getCompanyName());
+                        a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(a);
+                        finish();
 
+                    } else {
+                        int counter = 5;
+
+                        counter--;
+                        attempts.setText("No of attempts remaining: " + counter);
+                        if (counter == 0) {
+                            login.setEnabled(false);
                         }
-//                        if(!userSnapshot.exists()){
-//                            databaseReference.setValue(new UserInformation(Username, Pasword));
-//                        }
-
-//
-//                       else if (!( Username.equals(userInformation.getName()) && Pasword.equals(userInformation.getPassword()))) {
-//                            Toast.makeText(LoginActivity.this, "User Does not Exist, Please Try Again", Toast.LENGTH_SHORT).show();
-//                        }
-
-
-
-
-
-
-
-
+                        Toast.makeText(LoginActivity.this, "User Does not Exist", Toast.LENGTH_SHORT).show();
+                    }
                 }
-
-//               if (!( Username.equals(users.getName()))){
-//                    Toast.makeText(LoginActivity.this, "Your Name is InCorrect", Toast.LENGTH_SHORT).show();
-//
-//                }
-//
-//               if (!( Pasword.equals(users.getName()))){
-//                    Toast.makeText(LoginActivity.this, "Your Password is InCorrect", Toast.LENGTH_SHORT).show();
-//
-//                }
-//
+                /////Validations on Email and password and the counter
 
             }
 
-
-
-
-
-
-            // DataStatus.DataIsLoaded(UserInformation, userinfo);
-
-
-                  //   UserInformation customer = dataSnapshot.getValue(UserInformation.class);
-                    // Log.d(TAG, Email + " / " +Pasword);
-//                     if (Email.equals(customer.getEtmail()) && Pasword.equals(customer.getEtpass())) {
-//
-//                    Toast.makeText(LoginActivity.this, "You are Successfully Login", Toast.LENGTH_LONG).show();
-//                    Intent a = new Intent(LoginActivity.this, Homepage.class);
-//                    startActivity(a);
-//                    finish();
-//                }
-////
-//                else {
-//
-//                    Toast.makeText(LoginActivity.this, "User Does not Exits, Please Try Again", Toast.LENGTH_LONG).show();
-//                }
-//
-
-
-             //   UserInformation customer = dataSnapshot.getValue(UserInformation.class);
-//
-////                String value = dataSnapshot.getValue(String.class);
-////                Log.d(TAG,"Value is: " + customer.getEtmail()+ "password:" +customer.getEtpass());
-//
-
-                /////Validations on Email and password and the counter
-
-
-
-
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(LoginActivity.this,"User Does not Exits, Please Try Again" ,Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, "User Does not Exits, Please Try Again", Toast.LENGTH_LONG).show();
                 //      Log.w(TAG, "Failed to read value.", error.toException());
 
                 //  UserInformation users = databaseError.toString(UserInformation.class);
@@ -274,20 +169,14 @@ public class LoginActivity extends AppCompatActivity  {
             }
         });
 
-
-
         if (TextUtils.isEmpty(Username) && TextUtils.isEmpty(Pasword)) {
             Toast.makeText(LoginActivity.this, "Fields are empty", Toast.LENGTH_SHORT).show();
 
-        }
-
-        else if (TextUtils.isEmpty(Pasword)) {
+        } else if (TextUtils.isEmpty(Pasword)) {
             password.setError("Required");
             Toast.makeText(LoginActivity.this, "Fill your Password Field, and Try Again", Toast.LENGTH_LONG).show();
-        }
-
-        else if (TextUtils.isEmpty(Username)) {
-           UserName.setError("Required");
+        } else if (TextUtils.isEmpty(Username)) {
+            UserName.setError("Required");
             Toast.makeText(LoginActivity.this, "Fill your UserName Field, and Try Again", Toast.LENGTH_LONG).show();
         }
 
@@ -297,17 +186,6 @@ public class LoginActivity extends AppCompatActivity  {
 
 
 
-        else {
-            //Toast.makeText(LoginActivity.this, "User Does not Exist, Try Again ", Toast.LENGTH_SHORT).show();
-
-            counter--;
-            attempts.setText("No of attempts remaining::" + counter);
-            if (counter == 0) {
-                login.setEnabled(false);
-            }
-
-
-        }
     }
 
 

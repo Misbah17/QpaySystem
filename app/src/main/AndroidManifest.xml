@@ -3,7 +3,7 @@
     package="com.microhybrid.transactionsystem">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA"></uses-permission>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -12,6 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".FYP"></activity>
+        <activity android:name=".UserHistory" />
+        <activity android:name=".profileActivity" />
         <activity android:name=".ScanCode" />
         <activity android:name=".GenerateQR" />
         <activity android:name=".LoginActivity" />
@@ -20,7 +23,8 @@
             android:name=".Homepage"
             android:label="@string/title_activity_homepage"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:theme="@style/splasttheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

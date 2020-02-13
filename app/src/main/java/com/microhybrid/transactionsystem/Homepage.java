@@ -22,6 +22,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.w3c.dom.Text;
+
 
 public class Homepage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -32,7 +34,7 @@ private FirebaseAuth.AuthStateListener mAuthListener;
     FirebaseDatabase firebaseDatabase;
     FirebaseAuth mAuth;
    // private Session session;
-    TextView TVusername, TVuseremail;
+   public static TextView TVusername, TVuseremail ,TVNo,TVCOMP;
     public static final String TAG = "YOUR-TAG-NAME";
     String Userid;
 
@@ -54,6 +56,8 @@ private FirebaseAuth.AuthStateListener mAuthListener;
                 if (User != null) {
                     // User is signed in
                     Log.d(TAG,"onAuthStateSignedin:" +User.getUid());
+                    Intent a = new Intent(Homepage.this, GenerateQR.class);
+                    a.putExtra("Name",User.getDisplayName());
                     Log.d(TAG,"onAuthStateSignedin:" +User.getDisplayName());
 
 
@@ -82,11 +86,11 @@ private FirebaseAuth.AuthStateListener mAuthListener;
 //        String username = TVusername.getText().toString();
 
         Intent i = getIntent();
-          //TVusername.setText(i.getStringExtra("Values"));
+        //TVusername.setText(i.getStringExtra("Values"));
 
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase =FirebaseDatabase.getInstance();
-      //  CurrentUser = mAuth.getCurrentUser();
+       User = mAuth.getCurrentUser();
 
       // session = new Session();
 
@@ -111,7 +115,7 @@ private FirebaseAuth.AuthStateListener mAuthListener;
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-       // UpdateNavHeader();
+        UpdateNavHeader();
     }
 
     @Override
@@ -142,6 +146,8 @@ private FirebaseAuth.AuthStateListener mAuthListener;
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent profile= new Intent(Homepage.this,profileActivity.class);
+            startActivity(profile);
             return true;
         }
 
@@ -204,16 +210,38 @@ private FirebaseAuth.AuthStateListener mAuthListener;
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         View header = navigationView.getHeaderView(0);
-//       TextView TVusername = (TextView) header.findViewById(R.id.tvusername);
-//        TextView TVuseremail = (TextView) header.findViewById(R.id.tvuseremail);
+        TVusername = (TextView) header.findViewById(R.id.tvusername);
+        TVuseremail = (TextView) header.findViewById(R.id.tvuseremail);
+        TVNo = (TextView) header.findViewById(R.id.TVphone);
+        TVCOMP = (TextView) header.findViewById(R.id.TVcom);
 
-   //    TVusername.setText(CurrentUser.getDisplayName());
-//        TVuseremail.setText(CurrentUser.getEmail());
+        Intent b = getIntent();
+        String x =b.getStringExtra("Name");
+        String y =b.getStringExtra("Email");
+        String z =b.getStringExtra("Num");
+        String a =b.getStringExtra("company");
+        TVusername.setText(x);
+        TVuseremail.setText(y);
+        TVNo.setText(z);
+        TVCOMP.setText(a);
+        TVNo.setVisibility(View.INVISIBLE);
+
+        Intent c =  new Intent(Homepage.this,profileActivity.class);
+        c.putExtra("Name", x);
+
+        // b.putExtra("profileName",x);
+
+       //  Log.d(TAG,"show message", );
+
+
+
+//       TVusername.setText(User.getDisplayName());
+//       TVuseremail.setText(User.getEmail());
     }
 
 //    public  void onStart(){
 //        super.onStart();
-//      mAuth.addAuthStateListener(mAuthListener);
+//        mAuth.addAuthStateListener(mAuthListener);
 //    }
 //
 //    public void onStop(){

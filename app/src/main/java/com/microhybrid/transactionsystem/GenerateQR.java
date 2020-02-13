@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -47,8 +48,10 @@ public class GenerateQR extends AppCompatActivity {
     Button Scan;
     ArrayAdapter<String> adapter;
     public static ListView list;
-    public static EditText ScanResult;
+  public static EditText ScanResult;
     private List<String> userInformations ;
+    public  String st;
+   public static TextView name ,email, amount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,17 +60,23 @@ public class GenerateQR extends AppCompatActivity {
 
 
         Scan = findViewById(R.id.btnscan);
-       ScanResult = findViewById(R.id.ScanResult);
+        ScanResult = findViewById(R.id.ScanResult);
         qrImage = (ImageView) findViewById(R.id.imageQR);
         edtValue = (EditText) findViewById(R.id.etinputvalue);
         start = (Button) findViewById(R.id.Generateqr);
-        list = findViewById(R.id.listviewuser);
+        name = findViewById(R.id.tvname);
+        email = findViewById(R.id.tvemail);
+        amount = findViewById(R.id.tvamoutn);
 
-        user =FirebaseAuth.getInstance().getCurrentUser();
+          //ScanResult.setVisibility(View.INVISIBLE);
+     //   user =FirebaseAuth.getInstance().getCurrentUser();
 
 
+        name.setVisibility(View.INVISIBLE);
+        email.setVisibility(View.INVISIBLE);
+        amount.setVisibility(View.INVISIBLE);
 
-          if (user != null) {
+        if (user != null) {
             // User is signed in
             Intent i = new Intent(GenerateQR.this, GenerateQR.class);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -92,8 +101,8 @@ public class GenerateQR extends AppCompatActivity {
 
 
         //  save = (Button) findViewById(R.id.btngeneratecode);
-        mauth = FirebaseAuth.getInstance();
-        user = FirebaseAuth.getInstance().getCurrentUser();
+     // st = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
 
     }
 
@@ -101,19 +110,25 @@ public class GenerateQR extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         String amountInput = edtValue.getText().toString().trim();
+
        DatabaseReference ref = database.getReference().child("user Information");
 
-        final UserInformation userInformation = new UserInformation();
+         UserInformation userInformation = new UserInformation();
+//
+//        Intent b = getIntent();
+//      //  String name= b.getStringExtra("Name");
 
         final String name;
         final String amount;
         final String email;
         final String date;
-
-        name= transaction.user_name;
-        email = transaction.user_email;
+        name = Homepage.TVusername.getText().toString();
+       // name = userInformation.getName();
+        email = Homepage.TVuseremail.getText().toString();
         amount = amountInput;
         date = transaction.date;
+
+
 
 //          userInformations = new ArrayList<String>();
 //
