@@ -1,6 +1,7 @@
 package com.microhybrid.transactionsystem;
         //      val qrCodeScanner = findViewById(R.id.qrCodeScanner);
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -132,15 +133,26 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
                     i++;
                 }
 
-                GenerateQR.name.setVisibility(View.VISIBLE);
-                   GenerateQR.name.setText(nameS);
 
-                GenerateQR.email.setVisibility(View.VISIBLE);
-                 GenerateQR.email.setText(emailS);
+                Intent his = new Intent(ScanCode.this,UserHistory.class);
 
-                GenerateQR.amount.setVisibility(View.VISIBLE);
-                GenerateQR.amount.setText(amountS);
 
+              // GenerateQR.tv.setText(nameS);
+               // UserHistory.name.setText(nameS);
+
+
+                his.putExtra("Name",nameS);
+                his.putExtra("Email",emailS);
+                his.putExtra("Amount",amountS);
+
+               startActivity(his);
+
+//                UserHistory.name.setVisibility(View.VISIBLE);
+//                UserHistory.email.setVisibility(View.VISIBLE);
+////                UserHistory.email.setText(emailS);
+//
+//                UserHistory.amount.setVisibility(View.VISIBLE);
+//                UserHistory.amount.setText(amountS);
 
 
                 onBackPressed();

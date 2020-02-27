@@ -22,6 +22,16 @@
     <string name="passworderror">Enter Some Password</string>
     <string name="mobileerror">Enter Valid Mobile Number</string>
     <string name="confirmpassworderror">Password Does not match</string>
+    <string name="privacy">
+
+
+
+
+        A lot of people ask for sample privacy policies for apps. The exact required contents of a privacy policy depends upon the law applicable to you and may even need to address requirements across geographical boundaries and legal jurisdictions.
+        For this reason, it’s always advisable that you approach your (legally mandated) privacy policy with the strictest applicable regulations in mind.If your app handles personal or sensitive user data, there are additional requirements described below.
+        This policy establishes Google Play’s minimum privacy requirements; you or your app may need to comply with additional restrictions or procedures if required by an applicable law. "
+
+    </string>
 
 
 </resources>

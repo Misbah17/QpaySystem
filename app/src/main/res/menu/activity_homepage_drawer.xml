@@ -8,18 +8,39 @@
             android:id="@+id/nav_notify"
             android:icon="@drawable/ic_notifications"
             android:title="Notificatons" />
+
         <item
             android:id="@+id/nav_loanreq"
             android:icon="@drawable/ic_loanrequest"
             android:title="Loan Request" />
+
         <item
             android:id="@+id/nav_history"
             android:icon="@drawable/ic_history"
             android:title="History" />
+
+        <item
+             android:id="@+id/send"
+            android:icon="@drawable/generate"
+             android:title="Generate Code"
+             />
+
+        <item
+            android:id="@+id/amount"
+            android:title="Amount"
+            android:icon="@drawable/amount"
+            />
+
+        <item
+            android:id="@+id/policy"
+            android:icon="@drawable/privacy"
+            android:title="Policy&amp;Privacy"
+            />
+
         <item
             android:id="@+id/logout"
-
             android:title="Logout" />
+
     </group>
 
     <!--<item android:title="Communicate">-->

@@ -38,9 +38,8 @@ public class LoginActivity extends AppCompatActivity  {
     ProgressBar PGL;
     FirebaseDatabase databse;
     private DatabaseReference ref;
-
+    public TextView getReg;
     public static final String TAG = "YOUR-TAG-NAME";
-
     TextView tvload;
     ListView list;
     ArrayAdapter<String> adapter;
@@ -67,7 +66,7 @@ public class LoginActivity extends AppCompatActivity  {
         login = findViewById(R.id.btLogin);
         tvload = findViewById(R.id.tvtoast);
         list = findViewById(R.id.mListview);
-
+        getReg = findViewById(R.id.register);
 
 
 
@@ -195,6 +194,12 @@ public class LoginActivity extends AppCompatActivity  {
        // Intent  btnreg = new Intent(LoginActivity.this,ScanCode.class);
         startActivity(btnreg);
 
+    }
+
+    public void getReg(View view) {
+        Intent  link = new Intent(LoginActivity.this,ActivitySignup.class);
+        // Intent  btnreg = new Intent(LoginActivity.this,ScanCode.class);
+        startActivity(link);
     }
 
 //    public void handleResult(Result rawResult){

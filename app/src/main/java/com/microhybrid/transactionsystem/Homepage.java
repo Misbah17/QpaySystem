@@ -102,7 +102,7 @@ private FirebaseAuth.AuthStateListener mAuthListener;
             public void onClick(View view) {
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
-                Intent a = new Intent(Homepage.this, GenerateQR.class);
+                Intent a = new Intent(Homepage.this, ScanCode.class);
                 startActivity(a);
 
             }
@@ -163,15 +163,37 @@ private FirebaseAuth.AuthStateListener mAuthListener;
 
            switch (item.getItemId()) {
             case R.id.nav_loanreq:
-                getSupportFragmentManager().beginTransaction().replace(R.id.Content_fragment,
-                        new LoanRequest()).commit();
+                Intent pay= new Intent(Homepage.this,payment.class);
+                startActivity(pay);
                 break;
+
 
 
             case R.id.nav_history:
-                getSupportFragmentManager().beginTransaction().replace(R.id.Content_fragment,
-                        new History()).commit();
+//                getSupportFragmentManager().beginTransaction().replace(R.id.Content_fragment,
+//                        new History()).commit();
+                Intent history = new Intent(Homepage.this,UserHistory.class);
+                startActivity(history);
                 break;
+
+               case R.id.send:
+
+                   Intent qr = new Intent(Homepage.this,GenerateQR.class);
+                   startActivity(qr);
+                   break;
+
+               case R.id.amount:
+                   Intent Rec = new Intent(Homepage.this,payment.class);
+                   startActivity(Rec);
+                   break;
+
+               case R.id.policy:
+                   Intent pol= new Intent(Homepage.this,privacy.class);
+                   startActivity(pol);
+                   break;
+
+
+
 
             case  R.id.logout:
                 mAuth.getInstance().signOut();

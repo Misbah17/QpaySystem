@@ -16,13 +16,14 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="#FF5722"
+            android:baselineAligned="false"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
 
-    <include
-        layout="@layout/content_homepage" />
+    <!--<include-->
+        <!--layout="@layout/content_homepage" />-->
 
 
 
@@ -34,5 +35,14 @@
         android:layout_margin="@dimen/fab_margin"
         android:backgroundTint="#FFAA1D"
         app:srcCompat="@android:drawable/ic_input_get" />
+
+
+    <ImageView
+        android:layout_width="2dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logogomaker"
+        android:layout_marginTop="50dp"
+        />
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

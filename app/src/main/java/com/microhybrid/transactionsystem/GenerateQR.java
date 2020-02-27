@@ -3,8 +3,11 @@ package com.microhybrid.transactionsystem;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.format.DateFormat;
+import android.text.style.TtsSpan;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -16,15 +19,23 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.google.zxing.WriterException;
 
+import java.io.File;
+import java.util.Date;
 import java.util.List;
 
 import androidmads.library.qrgenearator.QRGContents;
@@ -38,7 +49,7 @@ public class GenerateQR extends AppCompatActivity {
     FirebaseDatabase databse;
     private DatabaseReference ref;
     String TAG = "GenerateQRCode";
-    EditText edtValue;
+  public static   EditText edtValue;
     ImageView qrImage;
     Button start, save;
     String inputValue;
@@ -47,11 +58,14 @@ public class GenerateQR extends AppCompatActivity {
     QRGEncoder qrgEncoder;
     Button Scan;
     ArrayAdapter<String> adapter;
-    public static ListView list;
-  public static EditText ScanResult;
     private List<String> userInformations ;
     public  String st;
-   public static TextView name ,email, amount;
+    public  static TextView tv;
+    public static String amount;
+    private StorageReference mStorageRef;
+    public static Date date;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,22 +73,15 @@ public class GenerateQR extends AppCompatActivity {
         setContentView(R.layout.activity_generate_qr);
 
 
-        Scan = findViewById(R.id.btnscan);
-        ScanResult = findViewById(R.id.ScanResult);
         qrImage = (ImageView) findViewById(R.id.imageQR);
         edtValue = (EditText) findViewById(R.id.etinputvalue);
         start = (Button) findViewById(R.id.Generateqr);
-        name = findViewById(R.id.tvname);
-        email = findViewById(R.id.tvemail);
-        amount = findViewById(R.id.tvamoutn);
+        tv= findViewById(R.id.text);
 
           //ScanResult.setVisibility(View.INVISIBLE);
      //   user =FirebaseAuth.getInstance().getCurrentUser();
+        mStorageRef = FirebaseStorage.getInstance().getReference();
 
-
-        name.setVisibility(View.INVISIBLE);
-        email.setVisibility(View.INVISIBLE);
-        amount.setVisibility(View.INVISIBLE);
 
         if (user != null) {
             // User is signed in
@@ -92,12 +99,7 @@ public class GenerateQR extends AppCompatActivity {
 //        Bundle bundle = getIntent().getExtras();
 //        resultScanTextview.setText(bundle.getString("Value"));
 
-        Scan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), ScanCode.class));
-            }
-        });
+
 
 
         //  save = (Button) findViewById(R.id.btngeneratecode);
@@ -119,61 +121,20 @@ public class GenerateQR extends AppCompatActivity {
 //      //  String name= b.getStringExtra("Name");
 
         final String name;
-        final String amount;
+
         final String email;
         final String date;
         name = Homepage.TVusername.getText().toString();
        // name = userInformation.getName();
-        email = Homepage.TVuseremail.getText().toString();
+       email = Homepage.TVuseremail.getText().toString();
         amount = amountInput;
         date = transaction.date;
 
 
 
-//          userInformations = new ArrayList<String>();
 //
-//          adapter = new ArrayAdapter<String>(this, R.layout.activity_generate_qr,R.id.username, userInformations);
-//        ref.addValueEventListener(new ValueEventListener() {
-//
-//
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//
-//                //showData(dataSnapshot);
-//                //  String amountInput = edtValue.getText().toString().trim();
-//
-//                //   final String amount; amount = amountInput;
-////                userInformations.clear();
-//
-//                List<String> userinfo = new ArrayList<>();
-//                for (DataSnapshot Snapshot : dataSnapshot.getChildren()) {
-//                    userinfo.add(Snapshot.getKey());
-//                    UserInformation retriveinfo = Snapshot.getValue(UserInformation.class);
-//                   // retriveinfo.setEmail(Snapshot.getValue(UserInformation.class).getEmail());
-//
-//                    final  String  name = retriveinfo.getName().toString();
-//                    ScanResult.setText(name);
-//                    //   name.matches(retriveinfo.getName());
-//                     // userInformations.add(userInformation.getName()+ ""+userInformation.getEmail());
-//                    //Log.v(" Name is","Current user is " +retriveinfo.getName());
-//                  //  name.contains(retriveinfo.getName());
-//                    //  name.concat(userInformation.getName());
-//                    //   resultScanTextview.setText(retriveinfo.getName());
-//
-//                }
-//                //list.setAdapter(adapter);
-//              //inputValue = ":"  + name +";:" + email + ";:" + amount + ";:" + date + ";";
-//              inputValue =":" + email + ";:" + amount + ";:" + date + ";";
-//                // list.setAdapter(adapter);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
 
-        inputValue = ":"  + name +";:" + email + ";:" + amount + ";:" + date + ";";
+        inputValue = ":"  + name +";:" + email + ";:" + amount+ ";:" + date + ";";
         if (amountInput.length() > 0) {
             WindowManager manager = (WindowManager) getSystemService(WINDOW_SERVICE);
             Display display = manager.getDefaultDisplay();
@@ -189,26 +150,43 @@ public class GenerateQR extends AppCompatActivity {
                     inputValue, null,
                     QRGContents.Type.TEXT,
                     smallerDimension);
+
+            int inputvalue = Integer.parseInt(amountInput);
+            int totalamount = UserHistory.money;
+            String s = String.valueOf(totalamount);
             try {
+
                 bitmap = qrgEncoder.encodeAsBitmap();
                 qrImage.setImageBitmap(bitmap);
+
             } catch (WriterException e) {
                 Log.v(TAG, e.toString());
             }
-        } else {
+
+
+                if (inputvalue < totalamount) {
+
+                    totalamount = totalamount - inputvalue;
+
+//                    payment.totalamount.setText("Your remaning amount is " + totalamount);
+                    Intent a = getIntent();
+                    a.putExtra("Remain", totalamount);
+                    Log.d(TAG, "Remaining amount" +totalamount);
+                }
+//            } catch (NullPointerException e) {
+//                Log.v(TAG, e.toString());
+//            }
+        }
+         else {
             edtValue.setError("Required");
         }
 
 
-    }
-
-    private void showData(DataSnapshot dataSnapshot) {
-
 
 
     }
-//            }
-//        });
+
+
 
 //        save.setOnClickListener(new View.OnClickListener() {
 //            @Override
