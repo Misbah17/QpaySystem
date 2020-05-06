@@ -16,7 +16,7 @@ import com.google.android.material.tabs.TabLayout;
 public class UserHistory extends AppCompatActivity {
 
     private static final String TAG = "";
-    public static TextView name ,email, amount;
+    public static TextView name ,email, amount, date;
     public Button Back;
     public static int money = 1000;
     public TextView Bal,value;
@@ -30,10 +30,15 @@ public class UserHistory extends AppCompatActivity {
         name = findViewById(R.id.tvname);
         email = findViewById(R.id.tvemail);
         amount = findViewById(R.id.tvamoutn);
+        date= findViewById(R.id.textView11);
         Bal =   findViewById(R.id.tvamoutn);
         value = findViewById(R.id.value);
-        Back = findViewById(R.id.backbtn);
-       // value.setVisibility(View.INVISIBLE);
+
+
+//        name.setVisibility(View.INVISIBLE);
+//        email.setVisibility(View.INVISIBLE);
+//        amount.setVisibility(View.INVISIBLE);
+//        date.setVisibility(View.INVISIBLE);
 
         Intent i = getIntent();
         String x =i.getStringExtra("Name");
@@ -60,7 +65,8 @@ try {
     if (money > b) {
         Toast.makeText(UserHistory.this, +b + " Money has been added to your account", +b + Toast.LENGTH_SHORT).show();
         // money = money-b;
-        value.setText("Remaining Balance::" + b);
+        value.setText("Your Transfer Amount is: " + b);
+       // date.setVisibility(View.VISIBLE);
 
     }
 }
@@ -72,9 +78,9 @@ catch (NumberFormatException e){
 //        }
     }
 
-    public void GoBack(View view) {
-         Intent prev= new Intent(UserHistory.this,Homepage.class);
-         startActivity(prev);
-         finish();
-    }
+//    public void GoBack(View view) {
+//         Intent prev= new Intent(UserHistory.this,Homepage.class);
+//         startActivity(prev);
+//         finish();
+//    }
 }

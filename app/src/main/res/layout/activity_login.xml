@@ -25,11 +25,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:visibility="gone"
-            android:background="@color/yellowcolor"/>
+          />
 
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/imageView3"
         android:layout_width="266dp"
         android:layout_height="94dp"
         android:layout_marginStart="8dp"
@@ -130,6 +131,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.31" />-->
+    <ImageView
+        android:id="@+id/hand"
+        android:layout_width="61dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/hand"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.65" />
 
     <TextView
         android:id="@+id/tvSignin"
@@ -145,7 +160,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.893" />
+        app:layout_constraintVertical_bias="0.795" />
 
     <TextView
         android:id="@+id/register"
@@ -161,7 +176,8 @@
         app:layout_constraintHorizontal_bias="0.429"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.688" />
+        app:layout_constraintVertical_bias="0.704" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

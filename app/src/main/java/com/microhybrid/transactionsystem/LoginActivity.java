@@ -82,6 +82,7 @@ public class LoginActivity extends AppCompatActivity  {
     public void reg(View view) {
 
          ////Read data after clicking the Button Login////
+
         PGL.setVisibility(View.VISIBLE);
         Logindata();
     //    handleResult();
@@ -151,7 +152,7 @@ public class LoginActivity extends AppCompatActivity  {
                         if (counter == 0) {
                             login.setEnabled(false);
                         }
-                        Toast.makeText(LoginActivity.this, "User Does not Exist", Toast.LENGTH_SHORT).show();
+
                     }
                 }
                 /////Validations on Email and password and the counter

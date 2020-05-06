@@ -95,21 +95,6 @@ public class profileActivity extends AppCompatActivity {
 
 
 
-//                    userInformation.getName()
-
-
-//                    ArrayAdapter adapter = new ArrayAdapter(LoginActivity.this,R.layout.loan_req, array);
-//                    list.setAdapter(adapter);
-
-                    //  adapter = new ArrayAdapter<UserInformation>(this,R.layout.loan_req,R.id.textView2,userinfo);
-                    ///  list.setAdapter(adapter);
-                    // userInformation.setPkgDetail(userSnap
-                    // shot.child(Username).getValue(UserInformation.class).getPkgDetail());
-                    // userInformations.add(userInformation);
-                    //UserInformation userInformation= dataSnapshot.getValue(UserInformation.class);
-//                  i
-//  email.setText(LoginActivity.password.getText());
-
 
                 }
             }

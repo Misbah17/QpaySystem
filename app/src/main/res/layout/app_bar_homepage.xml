@@ -6,6 +6,164 @@
     android:layout_height="match_parent"
     tools:context=".Homepage">
 
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="this is home page"-->
+        <!--android:textColor="@color/orangecolor"-->
+        <!--android:textSize="90dp" />-->
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="521dp"-->
+        <!--android:layout_marginTop="70dp"-->
+        <!--android:background="@color/yellowcolor">-->
+
+        <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:src="@drawable/maxresdefault"&ndash;&gt;-->
+        <!--&lt;!&ndash;/>&ndash;&gt;-->
+
+
+    <!--</LinearLayout>-->
+
+
+ <TextView
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:text=" Welcome to the Qpay System"
+     android:layout_marginTop="70dp"
+     android:textAlignment="center"
+     android:layout_marginLeft="20dp"
+     android:textStyle="normal"
+     android:textSize="25dp"
+     android:textColor="@color/orangecolor"/>
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="370dp"-->
+        <!--android:text=" Make your life fast and secure with QRpay System    and ease your lives. The App is useful and secure you from any robbery."/>-->
+
+
+    <!--<ImageView-->
+        <!--android:id="@+id/scan1"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_marginTop="120dp"-->
+        <!--android:layout_height="300dp"-->
+        <!--android:src="@drawable/animtedqr" />-->
+    <ImageView
+        android:layout_width="90dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginLeft="40dp"
+        android:src="@drawable/timesave"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save Time"
+        android:layout_marginTop="240dp"
+        android:layout_marginLeft="40dp"/>
+
+    <ImageView
+        android:layout_width="90dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginLeft="230dp"
+        android:src="@drawable/wallet"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Secure money"
+        android:layout_marginTop="240dp"
+        android:layout_marginLeft="230dp"/>
+
+   <View
+       android:id="@+id/divider4"
+       android:layout_width="170dp"
+       android:layout_height="3dp"
+       android:layout_marginTop="285dp"
+       android:layout_marginBottom="8dp"
+      android:layout_marginLeft="95dp"
+       android:background="#FF9800"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.61"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="@+id/linearLayout"
+       app:layout_constraintVertical_bias="0.97" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="3dp"
+        android:layout_height="170dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="179dp"
+        android:background="#FF9800"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+   <ImageView
+        android:layout_width="90dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="290dp"
+        android:layout_marginLeft="40dp"
+        android:src="@drawable/box"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fast Transaction"
+        android:layout_marginTop="400dp"
+        android:layout_marginLeft="40dp"/>
+
+    <ImageView
+        android:layout_width="90dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="290dp"
+        android:layout_marginLeft="230dp"
+        android:src="@drawable/digitalpayment"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Digital Payment"
+        android:layout_marginTop="400dp"
+        android:layout_marginLeft="230dp"/>
+
+
+
+
+    <ImageView
+
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:layout_marginTop="400dp"
+        android:src="@drawable/maxresdefault" />
+
+    <!--<View-->
+        <!--android:id="@+id/divider3"-->
+        <!--android:layout_width="350dp"-->
+        <!--android:layout_height="5dp"-->
+        <!--android:layout_marginTop="630dp"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:layout_marginStart="16dp"-->
+        <!--android:layout_marginEnd="16dp"-->
+        <!--android:background="#FF9800"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintHorizontal_bias="0.61"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/linearLayout"-->
+        <!--app:layout_constraintVertical_bias="0.97" />-->
+
+    <!--<ImageView-->
+        <!--android:layout_width="100dp"-->
+        <!--android:layout_height="150dp"-->
+        <!--android:src="@drawable/qr__code_coding_scan"-->
+        <!--android:layout_marginTop="500dp"-->
+        <!--android:layout_marginLeft="16dp"/>-->
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,6 +185,7 @@
 
 
 
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
@@ -36,13 +195,10 @@
         android:backgroundTint="#FFAA1D"
         app:srcCompat="@android:drawable/ic_input_get" />
 
-
-    <ImageView
-        android:layout_width="2dp"
-        android:layout_height="wrap_content"
-        android:src="@drawable/logogomaker"
-        android:layout_marginTop="50dp"
-        />
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:orientation="vertical"></LinearLayout>-->
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

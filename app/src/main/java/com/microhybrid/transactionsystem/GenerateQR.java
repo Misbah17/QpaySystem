@@ -126,7 +126,7 @@ public class GenerateQR extends AppCompatActivity {
         final String date;
         name = Homepage.TVusername.getText().toString();
        // name = userInformation.getName();
-       email = Homepage.TVuseremail.getText().toString();
+       email = Homepage.TVNo.getText().toString();
         amount = amountInput;
         date = transaction.date;
 

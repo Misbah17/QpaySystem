@@ -145,7 +145,11 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
                 his.putExtra("Email",emailS);
                 his.putExtra("Amount",amountS);
 
+
                startActivity(his);
+
+
+
 
 //                UserHistory.name.setVisibility(View.VISIBLE);
 //                UserHistory.email.setVisibility(View.VISIBLE);
